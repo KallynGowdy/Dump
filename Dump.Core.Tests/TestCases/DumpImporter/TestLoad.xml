@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RootNode attribute="abc">
+  <ChildNode id="1">
+    <Value>abcdefg</Value>
+    <Value>xyz</Value>
+  </ChildNode>
+</RootNode>

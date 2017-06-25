@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Dump.Core
@@ -10,13 +11,15 @@ namespace Dump.Core
     public class XmlDumpDocument : IDumpDocument
     {
         public string Name { get; }
-        public KeyValuePair<string, string>[] Data { get; }
+        public DumpData[] Data { get; }
+        public string Text { get; }
 
         private readonly XDocument doc;
 
-        public XmlDumpDocument(string path, XDocument doc)
+        public XmlDumpDocument(string path, string documentText, XDocument doc)
         {
             Name = Path.GetFileName(path);
+            Text = documentText;
             var elements = from node in doc.DescendantNodes()
                            where node is XElement
                            let element = (XElement)node
@@ -24,15 +27,19 @@ namespace Dump.Core
                            from attr in attrs
                            let key = BuildKey(attr)
                            let value = attr.Value
+                           let info = (IXmlLineInfo)element
+                           let line = info.LineNumber
                            orderby key
-                           select new KeyValuePair<string, string>(key, value);
+                           select new DumpData(key, value, line);
             var text = from node in doc.DescendantNodes()
                        where node is XText
                        let t = (XText)node
                        let key = BuildKey(t)
                        let value = t.Value
+                       let info = (IXmlLineInfo)t.Parent
+                       let line = info.LineNumber
                        orderby key
-                       select new KeyValuePair<string, string>(key, value);
+                       select new DumpData(key, value, line);
 
             Data = elements.Concat(text)
                 .OrderBy(kv => kv.Key.Length)

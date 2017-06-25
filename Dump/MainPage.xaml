@@ -5,9 +5,70 @@
     xmlns:local="using:Dump"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:grid="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:treeGrid="using:Syncfusion.UI.Xaml.TreeGrid"
+    xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="MainGrid" 
+          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="TopBar"
+              Grid.ColumnSpan="2"
+              Grid.Column="0"
+              Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="PathLabel"
+                       Grid.Column="0"
+                       Margin="8,0,8,0"
+                       Text="Path" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
+
+            <TextBox x:Name="Path"
+                     Grid.Column="1"
+                     IsEnabled="False"/>
+
+            <Button x:Name="PathPicker"
+                    Grid.Column="2">
+                <SymbolIcon Symbol="OpenFile"/>
+            </Button>
+        </Grid>
+
+        <input:SfTextBoxExt x:Name="SearchBox"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="1"
+                            PlaceholderText="Search"
+                            AutoCompleteMode="Suggest"
+                            SearchItemPath="Key"
+                            SuggestionMode="Contains"/>
+
+        <grid:SfDataGrid x:Name="Data"
+                         Grid.Column="0"
+                         Grid.Row="2"
+                         AllowResizingColumns="True" />
+
+        <TextBox x:Name="DocumentText"
+                 Grid.Column="1"
+                 Grid.Row="2"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 SelectionHighlightColorWhenNotFocused="Gray"/>
     </Grid>
 </Page>

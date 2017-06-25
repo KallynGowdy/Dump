@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -133,6 +133,22 @@
     <PackageReference Include="reactiveui">
       <Version>7.4.0</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.SfGrid.UWP46">
+      <Version>15.2.0.43</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.3.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dump.Core\Dump.Core.csproj">
+      <Project>{83ed4265-711a-4aba-b170-4c4da0e99132}</Project>
+      <Name>Dump.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dump.ViewModels\Dump.ViewModels.csproj">
+      <Project>{C43E508A-5C16-431F-85DA-70A5D53706EF}</Project>
+      <Name>Dump.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

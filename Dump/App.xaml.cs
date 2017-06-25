@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Dump.Core;
+using Splat;
 
 namespace Dump
 {
@@ -30,6 +32,8 @@ namespace Dump
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Locator.CurrentMutable.Register(() => new DumpImporter(), typeof(IDumpImporter));
         }
 
         /// <summary>

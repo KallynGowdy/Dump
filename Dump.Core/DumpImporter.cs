@@ -7,19 +7,19 @@ using System.Xml.Linq;
 
 namespace Dump.Core
 {
-    public class DumpImporter
+    public class DumpImporter : IDumpImporter
     {
         public async Task<DumpResult> LoadFromFileAsync(string path)
         {
             using (var stream = new StreamReader(File.OpenRead(path)))
             {
                 var text = await stream.ReadToEndAsync();
-                var document = XDocument.Parse(text);
+                var document = XDocument.Parse(text, LoadOptions.SetLineInfo);
                 return new DumpResult()
                 {
                     Documents = new List<IDumpDocument>()
                     {
-                        new XmlDumpDocument(path, document)
+                        new XmlDumpDocument(path, text, document)
                     }
                 };
             }

@@ -5,6 +5,7 @@ namespace Dump.Core
     public interface IDumpDocument
     {
         string Name { get; }
-        KeyValuePair<string, string>[] Data { get; }
+        DumpData[] Data { get; }
+        string Text { get; }
     }
 }

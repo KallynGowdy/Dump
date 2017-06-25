@@ -42,6 +42,36 @@ namespace Dump.Core.Tests
                 d => d.Value.Should().Be("xyz"));
         }
 
+        [Fact]
+        public async Task Test_Loads_Full_Text_From_File()
+        {
+            var path = PathToTestCase("TestLoad.xml");
+            var result = await Subject.LoadFromFileAsync(path);
+            var text = File.ReadAllText(path);
+
+            var document = result.Documents.First();
+
+            document.Text.Should().Be(text);
+        }
+
+        [Fact]
+        public async Task Test_Loads_Element_Positions()
+        {
+            var result = await Subject.LoadFromFileAsync(PathToTestCase("TestLoad.xml"));
+
+            result.Documents.Count.Should().Be(1);
+
+            var document = result.Documents.First();
+
+            document.Name.Should().Be("TestLoad.xml");
+
+            Assert.Collection(document.Data,
+                d => d.LineNumber.Should().Be(2),
+                d => d.LineNumber.Should().Be(3),
+                d => d.LineNumber.Should().Be(4),
+                d => d.LineNumber.Should().Be(5));
+        }
+
         public string PathToTestCase(string caseName) =>
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "TestCases", "DumpImporter", caseName);
     }

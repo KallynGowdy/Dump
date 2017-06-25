@@ -56,13 +56,19 @@
                             Grid.Row="1"
                             PlaceholderText="Search"
                             AutoCompleteMode="Suggest"
-                            SearchItemPath="Key"
+                            SearchItemPath="KeyAndValue"
                             SuggestionMode="Contains"/>
 
         <grid:SfDataGrid x:Name="Data"
                          Grid.Column="0"
                          Grid.Row="2"
-                         AllowResizingColumns="True" />
+                         AutoGenerateColumns="False"
+                         AllowResizingColumns="True">
+            <grid:SfDataGrid.Columns>
+                <grid:GridTextColumn HeaderText="Key" MappingName="Key" AllowFiltering="True"/>
+                <grid:GridTextColumn HeaderText="Value" MappingName="Value" AllowFiltering="True"/>
+            </grid:SfDataGrid.Columns>
+        </grid:SfDataGrid>
 
         <TextBox x:Name="DocumentText"
                  Grid.Column="1"

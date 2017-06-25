@@ -33,7 +33,7 @@ namespace Dump.Core.Tests
                 d => d.Key.Should().Be("RootNode@attribute"),
                 d => d.Key.Should().Be("RootNode/ChildNode@id"),
                 d => d.Key.Should().Be("RootNode/ChildNode/Value/"),
-                d => d.Key.Should().Be("RootNode/ChildNode/Value/"));
+                d => d.Key.Should().Be("RootNode/ChildNode/Value[1]/"));
 
             Assert.Collection(document.Data,
                 d => d.Value.Should().Be("abc"),

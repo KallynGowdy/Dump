@@ -63,7 +63,16 @@ namespace Dump.Core
             XElement current = element;
             while (current != null)
             {
-                segments.Add(current.Name.LocalName);
+                var count = current.ElementsBeforeSelf().Count();
+                if (count > 0)
+                {
+                    segments.Add($"{current.Name.LocalName}[{count}]");
+                }
+                else
+                {
+                    segments.Add(current.Name.LocalName);
+                }
+
                 current = current.Parent;
             }
             segments.Reverse();

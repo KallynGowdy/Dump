@@ -11,8 +11,9 @@ namespace Dump.Core
     {
         public string Key { get; }
         public string Value { get; }
-
         public int LineNumber { get; }
+
+        public string KeyAndValue => $"{Key} ({Value})";
 
         public DumpData(string key, string value, int lineNum = Int32.MinValue)
         {

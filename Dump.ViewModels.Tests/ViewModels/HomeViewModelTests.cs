@@ -100,7 +100,7 @@ namespace Dump.ViewModels.Tests.ViewModels
 
             await Subject.LoadData.Execute().FirstAsync();
 
-            Subject.Search = "key";
+            Subject.Search = "key (value)";
 
             Subject.SelectedRow.Should().Be(DumpImporter.Result.Documents[0].Data[0]);
         }
@@ -108,6 +108,7 @@ namespace Dump.ViewModels.Tests.ViewModels
         [Theory]
         [InlineData("01234\n67\n9", 1, 0, 5)]
         [InlineData("01234\n67\n9", 2, 6, 8)]
+        [InlineData("01234\n67\n9", 3, 9, 10)]
         public void Test_GetSelectionForData_Returns_Correct_Start_And_End_Indexes(string text, int line, int start, int end)
         {
             var data = new DumpData("a", "b", line);

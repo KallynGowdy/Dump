@@ -82,7 +82,7 @@ namespace Dump.ViewModels
 
             selectedRow = this.WhenAnyValue(vm => vm.Search)
                 .Where(s => Data != null)
-                .Select(s => Data.Documents.SelectMany(doc => doc.Data).FirstOrDefault(d => d.Key == s))
+                .Select(s => Data.Documents.SelectMany(doc => doc.Data).FirstOrDefault(d => d.KeyAndValue == s))
                 .Do(data =>
                 {
                     if (data != null)
@@ -122,6 +122,13 @@ namespace Dump.ViewModels
                     lineStart = i + 1;
                 }
             }
+
+            if (lineStart > 0 && start == 0)
+            {
+                start = lineStart;
+                end = text.Length;
+            }
+
             return (start, end);
         }
 
